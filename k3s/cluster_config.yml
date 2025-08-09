@@ -1,0 +1,46 @@
+---
+cluster_name: iac-prod-cluster
+kubeconfig_path: "./kubeconfig"
+k3s_version: v1.30.3+k3s1
+
+networking:
+  ssh:
+    port: 22
+    use_agent: false
+    public_key_path:
+    private_key_path:
+  allowed_networks:
+    ssh:
+      - 0.0.0.0/0
+    api:
+      - 0.0.0.0/0
+  public_network:
+    ipv4: true
+    ipv6: true
+  private_network:
+    enabled: true
+    subnet: 10.0.0.0/16
+  cni:
+    enabled: true
+    encryption: false
+    mode: flannel
+
+datastore:
+  mode: etcd
+
+schedule_workloads_on_masters: true
+
+masters_pool:
+  instance_type: cx22
+  instance_count: 1
+  locations:
+    - fsn1
+    - hel1
+    - nbg1
+
+embedded_registry_mirror:
+  enabled: false
+
+create_load_balancer_for_the_kubernetes_api: false
+
+k3s_upgrade_concurrency: 1
