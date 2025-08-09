@@ -1,4 +1,4 @@
-name: Deploy cluster changes
+name: IAC cluster changes
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - "k3s/cluster_config.yml"
+      - "kubernetes/cluster/**"
       - ".github/workflows/iac-cluster.yml"
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup SSH keys
+      - name: Setup SSH Key Files
         run: |
           mkdir -p ~/.ssh
           
@@ -32,19 +32,19 @@ jobs:
       - name: Setup helm
         uses: azure/setup-helm@v4.3.0
 
-      - name: Setup k3s script
+      - name: Setup hetzner-kubernetes
         run: |
           wget https://github.com/vitobotta/hetzner-k3s/releases/download/v2.3.9/hetzner-k3s-linux-amd64
           chmod +x hetzner-k3s-linux-amd64
           sudo mv hetzner-k3s-linux-amd64 /usr/local/bin/hetzner-k3s
 
-      - name: Deploy cluster
+      - name: Create or update cluster
         env:
           HCLOUD_TOKEN: ${{ secrets.HCLOUD_KEY }}
         run: |
-          hetzner-k3s create --config k3s/cluster_config.yml
+          hetzner-k3s create --config kubernetes/cluster/config.yml
 
-      - name: Store kubeconfig as a GitHub Secret
+      - name: Store kubeconfig as GitHub Secret
         run: |
           echo "${{ secrets.PA_SECRET_TOKEN }}" | gh auth login --with-token
 
