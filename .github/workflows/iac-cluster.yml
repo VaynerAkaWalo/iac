@@ -1,0 +1,44 @@
+name: Deploy cluster changes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "k3s/cluster_config.yml"
+      - ".github/workflows/iac-cluster.yml"
+
+jobs:
+  deploy-cluster:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH keys
+        run: |
+          mkdir -p ~/.ssh
+          
+          echo "${{ secrets.SSH_PRV_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          
+          echo "${{ secrets.SSH_PUB_KEY }}" > ~/.ssh/id_ed25519.pub
+          chmod 600 ~/.ssh/id_ed25519.pub
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Setup helm
+        uses: azure/setup-helm@v4.3.0
+
+      - name: Setup k3s script
+        run: |
+          wget https://github.com/vitobotta/hetzner-k3s/releases/download/v2.3.9/hetzner-k3s-linux-amd64
+          chmod +x hetzner-k3s-linux-amd64
+          sudo mv hetzner-k3s-linux-amd64 /usr/local/bin/hetzner-k3s
+
+      - name: Deploy cluser
+        env:
+          HCLOUD_TOKEN: ${{ secrets.HCLOUD_KEY }}
+        run: |
+          hetzner-k3s create --config k3s/cluster_config.yml
