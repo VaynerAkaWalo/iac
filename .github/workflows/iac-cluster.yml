@@ -1,6 +1,7 @@
 name: Deploy cluster changes
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -37,8 +38,14 @@ jobs:
           chmod +x hetzner-k3s-linux-amd64
           sudo mv hetzner-k3s-linux-amd64 /usr/local/bin/hetzner-k3s
 
-      - name: Deploy cluser
+      - name: Deploy cluster
         env:
           HCLOUD_TOKEN: ${{ secrets.HCLOUD_KEY }}
         run: |
           hetzner-k3s create --config k3s/cluster_config.yml
+
+      - name: Store kubeconfig as a GitHub Secret
+        run: |
+          echo "${{ secrets.PA_SECRET_TOKEN }}" | gh auth login --with-token
+
+          gh secret set KUBECONFIG_SECRET --body "$(cat kubeconfig)"
