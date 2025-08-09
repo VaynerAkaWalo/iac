@@ -3,8 +3,6 @@ name: IAC app changes
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
     paths:
       - ".github/workflows/iac-apps.yml"
       - "kubernetes/namespaces/**"
