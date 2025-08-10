@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/iac-apps.yml"
       - "kubernetes/namespaces/**"
+      - "kubernetes/charts/**"
 
 jobs:
   deploy-apps:
@@ -23,6 +24,9 @@ jobs:
       - name: Setup kubectl
         uses: azure/setup-kubectl@v4
 
+      - name: Setup helm
+        uses: azure/setup-helm@v4.3.0
+
       - name: Verify Cluster Connection
         run: |
           kubectl cluster-info
@@ -32,7 +36,27 @@ jobs:
         run: |
           for manifest in kubernetes/namespaces/*.yaml; do
             if [ -f "$manifest" ]; then
-              echo "Creating namespace: $manifest"
+              echo "Creating or updating namespace: $manifest"
               kubectl apply -f "$manifest"
+            fi
+          done
+
+      - name: Deploy charts
+        run: |
+          for namespace_dir in kubernetes/charts/*; do
+            if [ -d "$namespace_dir" ]; then
+              namespace_name=$(basename "$namespace_dir")
+              echo "Processing namespace: $namespace_name"
+          
+              for chart_path in "$namespace_dir"/*; do
+                if [ -d "$chart_path" ]; then
+                  chart_name=$(basename "$chart_path")
+                  echo "Creating or updating: $chart_name in $namespace_name"
+          
+                  helm dependency update "$chart_path"
+          
+                  helm upgrade --install "$chart_name" "$chart_path" -n "$namespace_name" --atomic --wait
+                fi
+              done
             fi
           done
