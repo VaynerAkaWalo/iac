@@ -11,5 +11,3 @@ spec:
     ephemeralStorage: true
   varVolumeStorageConfig:
     ephemeralStorage: true
-  homeVolumeStorageConfig:
-    ephemeralStorage: true
