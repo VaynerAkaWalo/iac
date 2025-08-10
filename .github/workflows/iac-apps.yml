@@ -53,16 +53,16 @@ jobs:
           helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
           helm upgrade --install sealed-secrets -n security sealed-secrets/sealed-secrets
 
-      - name: Deploye secrets
+      - name: Deploy secrets
         run: |
           for secret_path in kubernetes/secrets/*; do
-                if [ -d "secret_path" ]; then
-                  secret_name=$(basename "secret_path")
-                  echo "Creating or updating: $secret_name"
-          
-                  kubectl apply -f "$secret_path"
-                fi
-              done
+              if [ -d "secret_path" ]; then
+                secret_name=$(basename "secret_path")
+                echo "Creating or updating: $secret_name"
+        
+                kubectl apply -f "$secret_path"
+            fi
+          done
 
       - name: Deploy charts
         run: |
