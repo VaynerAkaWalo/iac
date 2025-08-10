@@ -1,0 +1,15 @@
+---
+apiVersion: enterprise.splunk.com/v4
+kind: Standalone
+metadata:
+  name: s1
+  finalizers:
+    - enterprise.splunk.com/delete-pvc
+  namespace: observability
+spec:
+  etcVolumeStorageConfig:
+    ephemeralStorage: true
+  varVolumeStorageConfig:
+    ephemeralStorage: true
+  homeVolumeStorageConfig:
+    ephemeralStorage: true
