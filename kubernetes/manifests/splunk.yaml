@@ -26,7 +26,7 @@ spec:
       namespace: infra
 
   hostnames:
-    - splunk.iac.blamedevs.com
+    - splunk-iac.blamedevs.com
 
   rules:
     - filters:
@@ -48,7 +48,7 @@ spec:
       namespace: infra
 
   hostnames:
-    - splunk.iac.blamedevs.com
+    - splunk-iac.blamedevs.com
 
   rules:
     - matches:
