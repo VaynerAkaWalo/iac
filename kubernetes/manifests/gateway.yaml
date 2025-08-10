@@ -1,0 +1,43 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: eg
+  namespace: infra
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: envoy-gateway
+  namespace: infra
+spec:
+  gatewayClassName: eg
+
+  infrastructure:
+    annotations:
+      load-balancer.hetzner.cloud/location: nbg1
+      load-balancer.hetzner.cloud/name: envoy-gateway
+      load-balancer.hetzner.cloud/use-private-ip: "true"
+      load-balancer.hetzner.cloud/hostname: blamedevs.com
+
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+         namespaces:
+           from: All
+
+    - name: https
+      protocol: HTTPS
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: blamedevs-root
+            namespace: infra
