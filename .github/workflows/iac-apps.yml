@@ -6,8 +6,7 @@ on:
     paths:
       - ".github/workflows/iac-apps.yml"
       - "certs"
-      - "kubernetes/namespaces/**"
-      - "kubernetes/charts/**"
+      - "kubernetes/**"
 
 jobs:
   deploy-apps:
@@ -76,3 +75,7 @@ jobs:
               done
             fi
           done
+
+      - name: Deploy manifests
+        run: |
+          kubectl apply -f kubernetes/manifests/

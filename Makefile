@@ -7,4 +7,5 @@ seal-tls-secret:
       --cert=certs/$(name)/secret.crt \
       --key=certs/$(name)/secret.key \
       --dry-run=client -o yaml > kubernetes/secrets/$(name)-plain-secret.yaml; \
-   	kubeseal --namespace=$(namespace) --cert=certs/sealed-secrets/secret.crt < kubernetes/secrets/$(name)-plain-secret.yaml > kubernetes/secrets/$(name).yaml
+   	kubeseal --namespace=$(namespace) --cert=certs/sealed-secrets/secret.crt < kubernetes/secrets/$(name)-plain-secret.yaml > kubernetes/secrets/$(name).yaml; \
+   	rm kubernetes/secrets/$(name)-plain-secret.yaml
