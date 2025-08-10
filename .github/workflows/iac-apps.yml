@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - ".github/workflows/iac-apps.yml"
+      - "certs"
       - "kubernetes/namespaces/**"
       - "kubernetes/charts/**"
 
@@ -40,6 +41,17 @@ jobs:
               kubectl apply -f "$manifest"
             fi
           done
+
+      - name: Setup sealed-secrets controller
+        run: |
+          echo "${{ secrets.SEALED_SECRETS_KEY }}" > prv.key
+          kubectl delete secret sealed-secrets-key -n security --ignore-not-found
+          kubectl create secret tls sealed-secrets-key -n security --cert=./certs/sealed-secrets.crt --key=./prv.key
+          rm prv.key
+          kubectl -n security label secret sealed-secrets-key sealedsecrets.bitnami.com/sealed-secrets-key=active
+          
+          helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
+          helm upgrade --install sealed-secrets -n security sealed-secrets/sealed-secrets
 
       - name: Deploy charts
         run: |
