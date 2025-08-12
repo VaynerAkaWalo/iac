@@ -1,0 +1,10 @@
+apiVersion: v2
+name: otel-collector
+description: A Helm chart for deploying the Open Telemetry collector
+type: application
+version: 0.1.0
+appVersion: "0.131.1"
+dependencies:
+  - name: splunk-otel-collector
+    version: 0.131.1
+    repository: https://signalfx.github.io/splunk-otel-collector-chart/

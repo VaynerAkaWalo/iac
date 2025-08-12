@@ -1,0 +1,15 @@
+clusterName: iac-prod
+namespaceOverride: splunk-operator
+splunkPlatform:
+  endpoint: http://splunk-s1-standalone-service:8088/services/collector/event
+  token:
+    secretKeyRef:
+      name: splunk-observability-secret
+      key: hec_token
+  index: logs
+  insecureSkipVerify: true
+
+tolerations:
+  - key: deployment-restriction
+    effect: NoSchedule
+    operator: Exists
