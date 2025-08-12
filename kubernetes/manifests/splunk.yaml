@@ -9,7 +9,7 @@ metadata:
 spec:
   smartstore:
     defaults:
-      volumeName: r2
+      volumeName: r2-vol
     volumes:
       - name: r2-vol
         path: k3s-logs/
