@@ -7,6 +7,20 @@ metadata:
     - enterprise.splunk.com/delete-pvc
   namespace: observability
 spec:
+  smartstore:
+    defaults:
+      volumeName: r2
+    indexes:
+      - name: logs
+        volumeName: r2
+    volumes:
+      - name: r2
+        path: k3s-logs/
+        endpoint:
+          secretKeyRef:
+            name: splunk-r2-keys
+            key: endpoint
+        secretRef: splunk-r2-keys
   etcVolumeStorageConfig:
     ephemeralStorage: true
   varVolumeStorageConfig:
