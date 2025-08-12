@@ -1,15 +1,16 @@
-clusterName: iac-prod
-namespaceOverride: splunk-operator
-splunkPlatform:
-  endpoint: http://splunk-s1-standalone-service:8088/services/collector/event
-  token:
-    secretKeyRef:
-      name: splunk-observability-secret
-      key: hec_token
-  index: logs
-  insecureSkipVerify: true
+splunk-otel-collector:
+  clusterName: iac-prod-cluster
+  namespaceOverride: observability
+  splunkPlatform:
+    endpoint: http://splunk-s1-standalone-service:8088/services/collector/event
+    index: logs
+    insecureSkipVerify: true
 
-tolerations:
-  - key: deployment-restriction
-    effect: NoSchedule
-    operator: Exists
+  secret:
+    create: false
+    name: otel-observability-secret
+
+  tolerations:
+    - key: deployment-restriction
+      effect: NoSchedule
+      operator: Exists
