@@ -70,7 +70,7 @@ jobs:
           
                   helm dependency update "$chart_path"
           
-                  helm upgrade --install "$chart_name" "$chart_path" -n "$namespace_name" --atomic --wait
+                  helm upgrade --install "$chart_name" "$chart_path" -n "$namespace_name" --atomic --wait --values "$chart_path"/values.yaml
                 fi
               done
             fi
