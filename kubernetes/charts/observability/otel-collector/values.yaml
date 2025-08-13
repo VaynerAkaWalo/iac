@@ -2,7 +2,7 @@ splunk-otel-collector:
   clusterName: iac-prod-cluster
   namespaceOverride: observability
   splunkPlatform:
-    endpoint: http://splunk-s1-standalone-service:8088/services/collector/event
+    endpoint: https://splunk-s1-standalone-service:8088/services/collector/event
     index: logs
     insecureSkipVerify: true
 
