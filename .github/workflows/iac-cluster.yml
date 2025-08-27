@@ -2,10 +2,6 @@ name: IAC cluster changes
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "kubernetes/cluster/**"
-      - ".github/workflows/iac-cluster.yml"
 
 jobs:
   deploy-cluster:
