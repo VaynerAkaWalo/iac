@@ -2,11 +2,6 @@ name: IAC app changes
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/iac-apps.yml"
-      - "certs"
-      - "kubernetes/**"
 
 jobs:
   deploy-apps:

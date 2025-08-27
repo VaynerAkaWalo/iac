@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "kubernetes/cluster/**"
+      - "provisioning/prod/**"
       - ".github/workflows/iac-cluster.yml"
 
 jobs:
@@ -40,10 +40,30 @@ jobs:
         env:
           HCLOUD_TOKEN: ${{ secrets.HCLOUD_KEY }}
         run: |
-          hetzner-k3s create --config kubernetes/cluster/config.yml
+          hetzner-k3s create --config provisioning/prod/iac-cluster.yml
 
       - name: Store kubeconfig as GitHub Secret
         run: |
           echo "${{ secrets.PA_SECRET_TOKEN }}" | gh auth login --with-token
 
           gh secret set KUBECONFIG_SECRET --body "$(cat kubeconfig)"
+
+      - name: Set kubeconfig from Secret
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG_SECRET }}" > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      - name: Setup Flux CLI
+        uses: fluxcd/flux2/action@main
+
+      - name: Bootstrap Flux CD
+        env:
+          GITHUB_TOKEN: ${{ secrets.FLUX_CD_ADMIN_TOKEN }}
+        run: |
+          flux bootstrap github \
+            --owner=${{ github.repository_owner }} \
+            --repository=${{ github.event.repository.name }} \
+            --branch=flux-cd \
+            --path=clusters/iac-cluster 
+
