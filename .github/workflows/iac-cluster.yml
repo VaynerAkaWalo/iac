@@ -48,6 +48,9 @@ jobs:
 
           gh secret set KUBECONFIG_SECRET --body "$(cat kubeconfig)"
 
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
       - name: Setup Flux CLI
         uses: fluxcd/flux2/action@main
 
