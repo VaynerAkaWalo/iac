@@ -2,6 +2,10 @@ name: IAC cluster changes
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "provisioning/prod/**"
+      - ".github/workflows/iac-cluster.yml"
 
 jobs:
   deploy-cluster:
@@ -36,7 +40,7 @@ jobs:
         env:
           HCLOUD_TOKEN: ${{ secrets.HCLOUD_KEY }}
         run: |
-          hetzner-k3s create --config kubernetes/cluster/config.yml
+          hetzner-k3s create --config provisioning/prod/iac-cluster.yml
 
       - name: Store kubeconfig as GitHub Secret
         run: |
