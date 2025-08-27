@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "provisioning/prod/**"
+      - "../../provisioning/production/**"
       - ".github/workflows/iac-cluster.yml"
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
         env:
           HCLOUD_TOKEN: ${{ secrets.HCLOUD_KEY }}
         run: |
-          hetzner-k3s create --config provisioning/prod/iac-cluster.yml
+          hetzner-k3s create --config provisioning/production/iac-cluster.yml
 
       - name: Store kubeconfig as GitHub Secret
         run: |
@@ -64,6 +64,6 @@ jobs:
           flux bootstrap github \
             --owner=${{ github.repository_owner }} \
             --repository=${{ github.event.repository.name }} \
-            --branch=flux-cd \
-            --path=clusters/iac-cluster 
+            --branch=update-folder-structure \
+            --path=clusters/production
 
