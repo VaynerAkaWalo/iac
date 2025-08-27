@@ -52,11 +52,12 @@ jobs:
         uses: fluxcd/flux2/action@main
 
       - name: Bootstrap Flux CD
+        env:
+          GITHUB_TOKEN: ${{ secrets.FLUX_CD_ADMIN_TOKEN }}
         run: |
           flux bootstrap github \
             --owner=${{ github.repository_owner }} \
             --repository=${{ github.event.repository.name }} \
             --branch=flux-cd \
-            --path=clusters/iac-cluster \
-            --token=${{ secrets.FLUX_CD_ADMIN_TOKEN }}
+            --path=clusters/iac-cluster 
 
