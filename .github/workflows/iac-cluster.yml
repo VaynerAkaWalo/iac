@@ -48,8 +48,11 @@ jobs:
 
           gh secret set KUBECONFIG_SECRET --body "$(cat kubeconfig)"
 
-      - name: Setup kubectl
-        uses: azure/setup-kubectl@v4
+      - name: Set kubeconfig from Secret
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG_SECRET }}" > ~/.kube/config
+          chmod 600 ~/.kube/config
 
       - name: Setup Flux CLI
         uses: fluxcd/flux2/action@main
