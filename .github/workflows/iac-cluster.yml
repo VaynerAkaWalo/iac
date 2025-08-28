@@ -67,3 +67,18 @@ jobs:
             --branch=main \
             --path=clusters/production
 
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Install Sealed Secrets key
+        run: |
+          kubectl create namespace security --dry-run=client -o yaml | kubectl apply -f -
+          echo "${{ secrets.SEALED_SECRETS_KEY }}" > prv.key
+          
+          kubectl delete secret sealed-secrets-key -n security --ignore-not-found
+          kubectl create secret tls sealed-secrets-key -n security --cert=./certs/sealed-secrets/secret.crt --key=./prv.key
+          
+          rm prv.key
+          
+          kubectl -n security label secret sealed-secrets-key sealedsecrets.bitnami.com/sealed-secrets-key=active
+
