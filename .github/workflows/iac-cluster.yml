@@ -64,6 +64,6 @@ jobs:
           flux bootstrap github \
             --owner=${{ github.repository_owner }} \
             --repository=${{ github.event.repository.name }} \
-            --branch=update-folder-structure \
+            --branch=main \
             --path=clusters/production
 
