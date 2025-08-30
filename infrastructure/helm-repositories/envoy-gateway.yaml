@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: envoy-gateway
+  namespace: infra
+spec:
+  interval: 1h
+  url: oci://docker.io/envoyproxy
