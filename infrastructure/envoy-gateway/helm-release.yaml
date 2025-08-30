@@ -7,7 +7,7 @@ spec:
   interval: 1h
   chart:
     spec:
-      chart: envoy-gateway
+      chart: gateway-helm
       sourceRef:
         kind: OCIRepository
         name: envoy-gateway
