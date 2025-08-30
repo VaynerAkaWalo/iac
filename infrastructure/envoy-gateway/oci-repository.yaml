@@ -5,4 +5,4 @@ metadata:
   namespace: infra
 spec:
   interval: 1h
-  url: oci://docker.io/envoyproxy
+  url: oci://docker.io/envoyproxy/gateway-helm
