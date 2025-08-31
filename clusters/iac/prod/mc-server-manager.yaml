@@ -8,7 +8,7 @@ spec:
   path: ./deployments/mc-server-manager/overlays/prod
   dependsOn:
     - name: namespaces
-    - name: mc-server-proxy
+    - name: mc-server-operator
     - name: envoy-gateway
   sourceRef:
     kind: GitRepository
