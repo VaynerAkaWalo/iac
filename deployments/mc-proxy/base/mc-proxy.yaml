@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mc-server-proxy
+  namespace: minecraft-server
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mc-proxy
+  template:
+    metadata:
+      labels:
+        app: mc-proxy
+    spec:
+      containers:
+        - name: mc-proxy
+          image: ghcr.io/vaynerakawalo/mc-proxy:34c68fc
+          ports:
+            - containerPort: 25565
+              protocol: TCP

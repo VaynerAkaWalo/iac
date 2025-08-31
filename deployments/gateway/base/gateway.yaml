@@ -32,3 +32,12 @@ spec:
         certificateRefs:
           - name: blamedevs-root
             namespace: infra
+
+    - name: mc-tcp
+      protocol: TCP
+      port: 25565
+      allowedRoutes:
+        namespaces:
+          from: All
+        kinds:
+          - kind: TCPRoute

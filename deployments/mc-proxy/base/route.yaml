@@ -1,0 +1,16 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TCPRoute
+metadata:
+  name: mc-proxy
+  namespace: minecraft-server
+spec:
+  parentRefs:
+    - name: envoy-gateway
+      sectionName: mc-tcp
+      kind: Gateway
+      namespace: infra
+
+  rules:
+    - backendRefs:
+        - name: mc-proxy
+          port: 25565
