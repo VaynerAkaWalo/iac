@@ -64,6 +64,8 @@ spec:
                   description: Foo is an example field of McServer. Edit mcserver_types.go
                     to remove/update
                   type: string
+                volume:
+                  type: string
               required:
                 - env
                 - expireAfter
@@ -377,7 +379,7 @@ spec:
             - --health-probe-bind-address=:8081
           command:
             - /manager
-          image: ghcr.io/vaynerakawalo/mc-server-operator:bb328a3
+          image: ghcr.io/vaynerakawalo/mc-server-operator:0e874ea
           livenessProbe:
             httpGet:
               path: /healthz
