@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: mc-server-manager
-          image: ghcr.io/vaynerakawalo/mc-server-manager:b5a43b5
+          image: ghcr.io/vaynerakawalo/mc-server-manager:438b311
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
