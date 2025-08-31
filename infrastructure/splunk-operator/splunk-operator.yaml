@@ -1,0 +1,14 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: splunk-operator
+  namespace: observability
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: splunk-operator
+      sourceRef:
+        kind: HelmRepository
+        name: splunk-operator
+      version: 2.8.1

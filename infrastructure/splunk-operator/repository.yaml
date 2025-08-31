@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: splunk-operator
+  namespace: observability
+spec:
+  interval: 1h
+  url: https://splunk.github.io/splunk-operator
