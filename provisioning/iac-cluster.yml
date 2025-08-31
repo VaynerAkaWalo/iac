@@ -1,5 +1,5 @@
 ---
-cluster_name: iac-prod-cluster
+cluster_name: iac-cluster
 kubeconfig_path: "./kubeconfig"
 k3s_version: v1.30.3+k3s1
 
