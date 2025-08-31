@@ -1,0 +1,22 @@
+apiVersion: enterprise.splunk.com/v4
+kind: Standalone
+metadata:
+  name: s1
+  finalizers:
+    - enterprise.splunk.com/delete-pvc
+  namespace: observability
+spec:
+  smartstore:
+    defaults:
+      volumeName: r2-vol
+    volumes:
+      - name: r2-vol
+        path: k3s-logs/
+        endpoint: https://6eb3c11dcd5305aa40c67a7d448631b0.r2.cloudflarestorage.com/iac-infra
+        secretRef: splunk-r2-keys
+    indexes:
+      - name: logs
+  etcVolumeStorageConfig:
+    ephemeralStorage: true
+  varVolumeStorageConfig:
+    ephemeralStorage: true
