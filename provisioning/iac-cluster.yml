@@ -39,19 +39,58 @@ masters_pool:
     - nbg1
 
 worker_node_pools:
-  - name: fsn1-server-nodes
-    instance_type: cax21
+  - name: server-nodes-small-shared
+    instance_type: cax11
     location: fsn1
     labels:
-      - key: target
-        value: server-nodes
+      - key: instanceType
+        value: shared
     taints:
-      - key: deployment-restriction
-        value: server:NoSchedule
+      - key: nodeType
+        value: mc-server-node:NoSchedule
     autoscaling:
       enabled: true
       min_instances: 0
-      max_instances: 5
+      max_instances: 4
+  - name: server-nodes-medium-shared
+    instance_type: cax21
+    location: fsn1
+    labels:
+      - key: instanceType
+        value: shared
+    taints:
+      - key: nodeType
+        value: mc-server-node:NoSchedule
+    autoscaling:
+      enabled: true
+      min_instances: 0
+      max_instances: 4
+  - name: server-nodes-medium-dedicated
+    instance_type: ccx13
+    location: fsn1
+    labels:
+      - key: instanceType
+        value: dedicated
+    taints:
+      - key: nodeType
+        value: mc-server-node:NoSchedule
+    autoscaling:
+      enabled: true
+      min_instances: 0
+      max_instances: 4
+  - name: server-nodes-large-dedicated
+    instance_type: ccx23
+    location: fsn1
+    labels:
+      - key: instanceType
+        value: dedicated
+    taints:
+      - key: nodeType
+        value: mc-server-node:NoSchedule
+    autoscaling:
+      enabled: true
+      min_instances: 0
+      max_instances: 4
 
 embedded_registry_mirror:
   enabled: false
