@@ -22,75 +22,72 @@ spec:
     singular: mcserver
   scope: Namespaced
   versions:
-  - name: v1alpha1
-    schema:
-      openAPIV3Schema:
-        description: McServer is the Schema for the mcservers API
-        properties:
-          apiVersion:
-            description: |-
-              APIVersion defines the versioned schema of this representation of an object.
-              Servers should convert recognized schemas to the latest internal value, and
-              may reject unrecognized values.
-              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-            type: string
-          kind:
-            description: |-
-              Kind is a string value representing the REST resource this object represents.
-              Servers may infer this from the endpoint the client submits requests to.
-              Cannot be updated.
-              In CamelCase.
-              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-            type: string
-          metadata:
-            type: object
-          spec:
-            description: McServerSpec defines the desired state of McServer
-            properties:
-              cpuLimit:
-                type: string
-              cpuRequest:
-                type: string
-              env:
-                additionalProperties:
+    - name: v1alpha1
+      schema:
+        openAPIV3Schema:
+          description: McServer is the Schema for the mcservers API
+          properties:
+            apiVersion:
+              description: |-
+                APIVersion defines the versioned schema of this representation of an object.
+                Servers should convert recognized schemas to the latest internal value, and
+                may reject unrecognized values.
+                More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+              type: string
+            kind:
+              description: |-
+                Kind is a string value representing the REST resource this object represents.
+                Servers may infer this from the endpoint the client submits requests to.
+                Cannot be updated.
+                In CamelCase.
+                More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: McServerSpec defines the desired state of McServer
+              properties:
+                env:
+                  additionalProperties:
+                    type: string
+                  type: object
+                expireAfter:
+                  format: int64
+                  type: integer
+                image:
                   type: string
-                type: object
-              expireAfter:
-                format: int64
-                type: integer
-              image:
-                type: string
-              memory:
-                type: string
-              name:
-                description: Foo is an example field of McServer. Edit mcserver_types.go
-                  to remove/update
-                type: string
-            required:
-            - cpuLimit
-            - cpuRequest
-            - env
-            - expireAfter
-            - image
-            - memory
-            - name
-            type: object
-          status:
-            description: McServerStatus defines the observed state of McServer
-            properties:
-              startedTime:
-                type: string
-              status:
-                type: string
-            required:
-            - startedTime
-            - status
-            type: object
-        type: object
-    served: true
-    storage: true
-    subresources:
-      status: {}
+                instanceType:
+                  type: string
+                memory:
+                  type: string
+                name:
+                  description: Foo is an example field of McServer. Edit mcserver_types.go
+                    to remove/update
+                  type: string
+              required:
+                - env
+                - expireAfter
+                - image
+                - instanceType
+                - memory
+                - name
+              type: object
+            status:
+              description: McServerStatus defines the observed state of McServer
+              properties:
+                startedTime:
+                  type: string
+                status:
+                  type: string
+              required:
+                - startedTime
+                - status
+              type: object
+          type: object
+      served: true
+      storage: true
+      subresources:
+        status: {}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -110,105 +107,105 @@ metadata:
   name: minecraft-server-leader-election-role
   namespace: minecraft-server
 rules:
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-- apiGroups:
-  - coordination.k8s.io
-  resources:
-  - leases
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - update
-  - patch
-  - delete
-- apiGroups:
-  - ""
-  resources:
-  - events
-  verbs:
-  - create
-  - patch
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - patch
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - patch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: minecraft-server-manager-role
 rules:
-- apiGroups:
-  - apps
-  resources:
-  - deployments
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - ""
-  resources:
-  - services
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - gateway.networking.k8s.io
-  resources:
-  - tcproutes
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - servers.blamedevs.com
-  resources:
-  - mcservers
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - servers.blamedevs.com
-  resources:
-  - mcservers/finalizers
-  verbs:
-  - update
-- apiGroups:
-  - servers.blamedevs.com
-  resources:
-  - mcservers/status
-  verbs:
-  - get
-  - patch
-  - update
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - services
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - gateway.networking.k8s.io
+    resources:
+      - tcproutes
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - servers.blamedevs.com
+    resources:
+      - mcservers
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - servers.blamedevs.com
+    resources:
+      - mcservers/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - servers.blamedevs.com
+    resources:
+      - mcservers/status
+    verbs:
+      - get
+      - patch
+      - update
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -218,24 +215,24 @@ metadata:
     app.kubernetes.io/name: mc-server-operator
   name: minecraft-server-mcserver-editor-role
 rules:
-- apiGroups:
-  - servers.blamedevs.com
-  resources:
-  - mcservers
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - servers.blamedevs.com
-  resources:
-  - mcservers/status
-  verbs:
-  - get
+  - apiGroups:
+      - servers.blamedevs.com
+    resources:
+      - mcservers
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - servers.blamedevs.com
+    resources:
+      - mcservers/status
+    verbs:
+      - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -245,48 +242,48 @@ metadata:
     app.kubernetes.io/name: mc-server-operator
   name: minecraft-server-mcserver-viewer-role
 rules:
-- apiGroups:
-  - servers.blamedevs.com
-  resources:
-  - mcservers
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - servers.blamedevs.com
-  resources:
-  - mcservers/status
-  verbs:
-  - get
+  - apiGroups:
+      - servers.blamedevs.com
+    resources:
+      - mcservers
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - servers.blamedevs.com
+    resources:
+      - mcservers/status
+    verbs:
+      - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: minecraft-server-metrics-auth-role
 rules:
-- apiGroups:
-  - authentication.k8s.io
-  resources:
-  - tokenreviews
-  verbs:
-  - create
-- apiGroups:
-  - authorization.k8s.io
-  resources:
-  - subjectaccessreviews
-  verbs:
-  - create
+  - apiGroups:
+      - authentication.k8s.io
+    resources:
+      - tokenreviews
+    verbs:
+      - create
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - subjectaccessreviews
+    verbs:
+      - create
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: minecraft-server-metrics-reader
 rules:
-- nonResourceURLs:
-  - /metrics
-  verbs:
-  - get
+  - nonResourceURLs:
+      - /metrics
+    verbs:
+      - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -301,9 +298,9 @@ roleRef:
   kind: Role
   name: minecraft-server-leader-election-role
 subjects:
-- kind: ServiceAccount
-  name: minecraft-server-controller-manager
-  namespace: minecraft-server
+  - kind: ServiceAccount
+    name: minecraft-server-controller-manager
+    namespace: minecraft-server
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -317,9 +314,9 @@ roleRef:
   kind: ClusterRole
   name: minecraft-server-manager-role
 subjects:
-- kind: ServiceAccount
-  name: minecraft-server-controller-manager
-  namespace: minecraft-server
+  - kind: ServiceAccount
+    name: minecraft-server-controller-manager
+    namespace: minecraft-server
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -330,9 +327,9 @@ roleRef:
   kind: ClusterRole
   name: minecraft-server-metrics-auth-role
 subjects:
-- kind: ServiceAccount
-  name: minecraft-server-controller-manager
-  namespace: minecraft-server
+  - kind: ServiceAccount
+    name: minecraft-server-controller-manager
+    namespace: minecraft-server
 ---
 apiVersion: v1
 kind: Service
@@ -345,10 +342,10 @@ metadata:
   namespace: minecraft-server
 spec:
   ports:
-  - name: https
-    port: 8443
-    protocol: TCP
-    targetPort: 8443
+    - name: https
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
   selector:
     control-plane: controller-manager
 ---
@@ -374,38 +371,38 @@ spec:
         control-plane: controller-manager
     spec:
       containers:
-      - args:
-        - --metrics-bind-address=:8443
-        - --leader-elect
-        - --health-probe-bind-address=:8081
-        command:
-        - /manager
-        image: ghcr.io/vaynerakawalo/mc-server-operator:3e478a8
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8081
-          initialDelaySeconds: 15
-          periodSeconds: 20
-        name: manager
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 8081
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        resources:
-          limits:
-            cpu: 500m
-            memory: 128Mi
-          requests:
-            cpu: 10m
-            memory: 64Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
+        - args:
+            - --metrics-bind-address=:8443
+            - --leader-elect
+            - --health-probe-bind-address=:8081
+          command:
+            - /manager
+          image: ghcr.io/vaynerakawalo/mc-server-operator:bb328a3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          name: manager
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
       securityContext:
         runAsNonRoot: true
       serviceAccountName: minecraft-server-controller-manager
