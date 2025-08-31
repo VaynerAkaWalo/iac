@@ -4,3 +4,4 @@ resources:
   - infra.yaml
   - observability.yaml
   - security.yaml
+  - minecraft-server.yaml
