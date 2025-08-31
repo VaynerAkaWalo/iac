@@ -40,7 +40,7 @@ masters_pool:
 
 worker_node_pools:
   - name: fsn1-server-nodes
-    instance_type: CAX21
+    instance_type: cax21
     location: fsn1
     labels:
       - key: target
