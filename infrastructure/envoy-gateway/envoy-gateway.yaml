@@ -1,3 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: envoy-gateway
+  namespace: infra
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: gateway-helm
+      sourceRef:
+        kind: HelmRepository
+        name: envoy-gateway
+      version: "1.5.0"
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: GatewayClass
 metadata:
