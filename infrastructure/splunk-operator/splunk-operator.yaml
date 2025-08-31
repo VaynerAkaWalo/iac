@@ -12,3 +12,11 @@ spec:
         kind: HelmRepository
         name: splunk-operator
       version: 2.8.1
+  values:
+    splunkOperator:
+      volumes:
+        - name: app-staging
+          emptyDir: { }
+      volumeMounts:
+        - mountPath: /opt/splunk/appframework/
+          name: app-staging
