@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mc-proxy
-          image: ghcr.io/vaynerakawalo/mc-proxy:34c68fc
+          image: ghcr.io/vaynerakawalo/mc-proxy:63a2b4c
           ports:
             - containerPort: 25565
               protocol: TCP
