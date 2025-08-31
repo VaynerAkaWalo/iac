@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mc-server-cleaner
+  namespace: minecraft-server
+spec:
+  schedule: "*/3 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: expired-server-cleaner
+              image: curlimages/curl:8.13.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - /bin/sh
+                - -c
+                - curl -X DELETE https://blamedevs.com/mc-server-manager/servers
+          restartPolicy: OnFailure
