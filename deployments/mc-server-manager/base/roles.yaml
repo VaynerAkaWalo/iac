@@ -1,0 +1,55 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: mc-server-management
+rules:
+  - apiGroups: ["servers.blamedevs.com"]
+    resources: ["mcservers"]
+    verbs: ["get", "list", "create", "delete"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: mc-server-management-binding
+subjects:
+  - kind: ServiceAccount
+    name: mc-server-manager-account
+    namespace: minecraft-server
+roleRef:
+  kind: ClusterRole
+  name: mc-server-management
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: minecraft-server
+  name: mc-server-management-routes
+rules:
+  - apiGroups: ["gateway.networking.k8s.io"]
+    resources: ["tcproutes"]
+    verbs: ["get", "list", "watch", "delete"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: minecraft-server
+  name: mc-server-management-routes-binding
+subjects:
+  - kind: ServiceAccount
+    name: mc-server-manager-account
+    namespace: minecraft-server
+roleRef:
+  kind: Role
+  name: mc-server-management-routes
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mc-server-manager-account
+  namespace: minecraft-server

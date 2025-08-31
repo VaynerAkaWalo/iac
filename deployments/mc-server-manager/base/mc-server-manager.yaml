@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mc-server-manager
+  namespace: minecraft-server
+  labels:
+    app: mc-server-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mc-server-manager
+  template:
+    metadata:
+      name: mc-server-manager
+      labels:
+        app: mc-server-manager
+    spec:
+      containers:
+        - name: mc-server-manager
+          image: ghcr.io/vaynerakawalo/mc-server-manager:c27369d
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: env
+              value: prod
+      restartPolicy: Always
+      serviceAccountName: mc-server-manager-account
