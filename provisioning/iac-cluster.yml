@@ -38,6 +38,21 @@ masters_pool:
     - hel1
     - nbg1
 
+worker_node_pools:
+  - name: fsn1-server-nodes
+    instance_type: CAX21
+    location: fsn1
+    labels:
+      - key: target
+        value: server-nodes
+    taints:
+      - key: deployment-restriction
+        value: server:NoSchedule
+    autoscaling:
+      enabled: true
+      min_instances: 0
+      max_instances: 5
+
 embedded_registry_mirror:
   enabled: false
 
