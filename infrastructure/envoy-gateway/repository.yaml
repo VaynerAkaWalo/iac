@@ -4,6 +4,6 @@ metadata:
   name: envoy-gateway
   namespace: infra
 spec:
-  type: "oci"
+  type: oci
   interval: 1h
   url: oci://docker.io/envoyproxy
