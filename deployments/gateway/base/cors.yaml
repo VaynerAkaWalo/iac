@@ -1,0 +1,22 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: cors-policy
+  namespace: infra
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-gateway
+  cors:
+    allowOrigins:
+      - "https://blamedevs.com"
+      - "https://vaynerakawalo.github.io"
+    allowMethods:
+      - GET
+      - POST
+      - DELETE
+      - PATCH
+      - PUT
+    allowHeaders:
+      - "Content-Type"
