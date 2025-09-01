@@ -25,6 +25,6 @@ spec:
       name: otel-observability-secret
 
     tolerations:
-      - key: deployment-restriction
+      - key: nodeType
         effect: NoSchedule
         operator: Exists
