@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - "../../provisioning/production/**"
+      - "../../provisioning/iac-cluster.yml"
       - ".github/workflows/iac-cluster.yml"
 
 jobs:
