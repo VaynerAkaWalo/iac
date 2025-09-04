@@ -65,25 +65,12 @@ worker_node_pools:
       enabled: true
       min_instances: 0
       max_instances: 4
-  - name: server-nodes-medium-dedicated
-    instance_type: ccx13
+  - name: server-nodes-large-shared
+    instance_type: cax31
     location: fsn1
     labels:
       - key: instanceType
-        value: dedicated
-    taints:
-      - key: nodeType
-        value: mc-server-node:NoSchedule
-    autoscaling:
-      enabled: true
-      min_instances: 0
-      max_instances: 4
-  - name: server-nodes-large-dedicated
-    instance_type: ccx23
-    location: fsn1
-    labels:
-      - key: instanceType
-        value: dedicated
+        value: shared
     taints:
       - key: nodeType
         value: mc-server-node:NoSchedule
