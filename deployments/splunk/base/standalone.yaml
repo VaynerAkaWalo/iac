@@ -6,10 +6,6 @@ metadata:
     - enterprise.splunk.com/delete-pvc
   namespace: observability
 spec:
-  etcVolumeStorageConfig:
-    storageCapacity: 10Gi
-  varVolumeStorageConfig:
-    storageCapacity: 30Gi
   smartstore:
     defaults:
       volumeName: r2-vol
@@ -20,3 +16,7 @@ spec:
         secretRef: splunk-r2-keys
     indexes:
       - name: logs
+  etcVolumeStorageConfig:
+    storageCapacity: 10Gi
+  varVolumeStorageConfig:
+    storageCapacity: 30Gi
