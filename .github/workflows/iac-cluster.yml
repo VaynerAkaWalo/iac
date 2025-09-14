@@ -89,7 +89,5 @@ jobs:
           kubectl create namespace observability --dry-run=client -o yaml | kubectl apply -f -
           echo "${{ secrets.SPLUNK_LICENSE }}" > Splunk.license
           
-          kubectl delete secret splunk-licenses -n observability --ignore-not-found
-          kubectl create configmap splunk-licenses -n observability --from-file=Splunk.license
-          
+          kubectl create configmap splunk-licenses -n observability --from-file=Splunk.license --dry-run -o yaml | kubectl apply -f -
           rm Splunk.license
