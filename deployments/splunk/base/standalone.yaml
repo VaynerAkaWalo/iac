@@ -9,9 +9,7 @@ spec:
   etcVolumeStorageConfig:
     storageCapacity: 10Gi
   varVolumeStorageConfig:
-    storageCapacity: 25Gi
-  licenseManagerRef:
-    name: license-manager
+    storageCapacity: 30Gi
   smartstore:
     defaults:
       volumeName: r2-vol
@@ -22,3 +20,8 @@ spec:
         secretRef: splunk-r2-keys
     indexes:
       - name: logs
+  volumes:
+    - name: splunk-licenses
+      configMap:
+        name: splunk-licenses
+  licenseUrl: /mnt/licenses/Splunk.license

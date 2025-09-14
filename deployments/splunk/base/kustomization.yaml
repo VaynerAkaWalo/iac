@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - standalone.yaml
   - routes.yaml
-  - license-manager.yaml
