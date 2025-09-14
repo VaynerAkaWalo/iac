@@ -18,7 +18,3 @@ spec:
         secretRef: splunk-r2-keys
     indexes:
       - name: logs
-  etcVolumeStorageConfig:
-    ephemeralStorage: true
-  varVolumeStorageConfig:
-    ephemeralStorage: true
