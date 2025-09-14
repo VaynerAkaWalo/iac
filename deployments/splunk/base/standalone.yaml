@@ -6,6 +6,10 @@ metadata:
     - enterprise.splunk.com/delete-pvc
   namespace: observability
 spec:
+  etcVolumeStorageConfig:
+    storageCapacity: 10Gi
+  varVolumeStorageConfig:
+    storageCapacity: 25Gi
   licenseManagerRef:
     name: license-manager
   smartstore:
