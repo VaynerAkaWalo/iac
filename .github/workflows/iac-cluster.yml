@@ -84,3 +84,12 @@ jobs:
           
           kubectl -n security label secret sealed-secrets-key sealedsecrets.bitnami.com/sealed-secrets-key=active
 
+      - name: Install splunk license
+        run: |
+          kubectl create namespace observability --dry-run=client -o yaml | kubectl apply -f -
+          echo "${{ secrets.SPLUNK_LICENSE }}" > Splunk.license
+          
+          kubectl delete secret splunk-licenses -n observability --ignore-not-found
+          kubectl create configmap splunk-licenses -n observability --from-file=Splunk.license
+          
+          rm Splunk.license

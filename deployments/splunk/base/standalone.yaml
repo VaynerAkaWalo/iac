@@ -6,6 +6,8 @@ metadata:
     - enterprise.splunk.com/delete-pvc
   namespace: observability
 spec:
+  licenseManagerRef:
+    name: license-manager
   smartstore:
     defaults:
       volumeName: r2-vol

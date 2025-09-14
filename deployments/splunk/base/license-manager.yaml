@@ -1,0 +1,13 @@
+apiVersion: enterprise.splunk.com/v4
+kind: LicenseManager
+metadata:
+  name: license-manager
+  namespace: observability
+  finalizers:
+    - enterprise.splunk.com/delete-pvc
+spec:
+  volumes:
+    - name: licenses
+      configMap:
+        name: splunk-licenses
+  licenseUrl: /mnt/licenses/Splunk.license
