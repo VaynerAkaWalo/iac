@@ -16,6 +16,7 @@ spec:
         secretRef: splunk-r2-keys
     indexes:
       - name: logs
+      - name: tymiec
   etcVolumeStorageConfig:
     storageCapacity: 10Gi
   varVolumeStorageConfig:
