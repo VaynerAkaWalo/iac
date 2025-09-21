@@ -48,6 +48,6 @@ spec:
 
       backendRefs:
         - name: splunk-s1-standalone-service
-          namespace: splunk-operator
+          namespace: observability
           port: 8088
 
