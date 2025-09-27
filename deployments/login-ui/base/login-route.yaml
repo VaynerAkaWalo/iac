@@ -32,6 +32,6 @@ spec:
                 value: vaynerakwalo.github.io
 
       backendRefs:
-        - name: external-name-login
+        - name: login-ui-external-name
           namespace: auth
           port: 443
