@@ -25,6 +25,12 @@ spec:
               type: ReplacePrefixMatch
               replacePrefixMatch: /login-ui
 
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: Host
+                value: vaynerakwalo.github.io
+
       backendRefs:
         - name: external-name-login
           namespace: auth
