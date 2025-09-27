@@ -28,8 +28,8 @@ spec:
         - type: RequestHeaderModifier
           requestHeaderModifier:
             set:
-              - name: Host
-                value: vaynerakwalo.github.io
+              - name: "Host"
+                value: "vaynerakawalo.github.io"
 
       backendRefs:
         - name: login-ui-external-name
