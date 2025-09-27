@@ -5,3 +5,4 @@ resources:
   - mc-server-operator.yaml
   - mc-server-manager.yaml
   - mc-server-cleaner.yaml
+  - login-ui.yaml
