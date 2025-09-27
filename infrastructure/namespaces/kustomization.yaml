@@ -5,3 +5,4 @@ resources:
   - observability.yaml
   - security.yaml
   - minecraft-server.yaml
+  - auth
