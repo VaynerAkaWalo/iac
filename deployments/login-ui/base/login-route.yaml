@@ -21,7 +21,7 @@ spec:
       filters:
         - type: URLRewrite
           urlRewrite:
-            hostname: myAccount.github.io
+            hostname: "vaynerakawalo.github.io"
             path:
               type: ReplacePrefixMatch
               replacePrefixMatch: /login-ui
