@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: login-ui
-          image: ghcr.io/vaynerakawalo/login-ui:551d26d
+          image: ghcr.io/vaynerakawalo/login-ui:9e5b115
           imagePullPolicy: Always
           ports:
             - containerPort: 80
