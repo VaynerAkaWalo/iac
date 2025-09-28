@@ -9,6 +9,7 @@ spec:
   dependsOn:
     - name: namespaces
     - name: envoy-gateway
+    - name: secrets
   sourceRef:
     kind: GitRepository
     name: flux-system
