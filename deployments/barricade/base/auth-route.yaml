@@ -19,7 +19,7 @@ spec:
           port: 8080
       matches:
         - path:
-            type: Prefix
+            type: PathPrefix
             value: /api
 
     - backendRefs:
