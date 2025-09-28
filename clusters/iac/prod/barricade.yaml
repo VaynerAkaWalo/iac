@@ -1,0 +1,16 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: barricade
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  path: ./deployments/barricade/overlays/prod
+  dependsOn:
+    - name: namespaces
+    - name: envoy-gateway
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  prune: true
+  wait: true

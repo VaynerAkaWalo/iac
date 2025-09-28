@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: barricade
+  namespace: auth
+  labels:
+    app: barricade
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: barricade
+  template:
+    metadata:
+      name: barricade
+      labels:
+        app: barricade
+    spec:
+      containers:
+        - name: barricade
+          image: ghcr.io/vaynerakawalo/barricade:61128a3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      restartPolicy: Always
