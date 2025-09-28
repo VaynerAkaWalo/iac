@@ -14,13 +14,13 @@ spec:
     - auth.blamedevs.com
 
   rules:
-    - matches:
+    - backendRefs:
+        - name: barricade
+          port: 8080
+      matches:
         - path:
             type: Prefix
             value: /api
-      backendRefs:
-        - name: barricade
-          port: 8080
 
     - backendRefs:
         - name: login-ui
