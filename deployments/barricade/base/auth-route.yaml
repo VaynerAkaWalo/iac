@@ -21,6 +21,12 @@ spec:
         - path:
             type: PathPrefix
             value: /api
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              replacePrefixMatch: /
+              type: ReplacePrefixMatch
 
     - backendRefs:
         - name: login-ui
