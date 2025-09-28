@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login-ui
+  namespace: auth
+  labels:
+    app: login-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: login-ui
+  template:
+    metadata:
+      name: login-ui
+      labels:
+        app: login-ui
+    spec:
+      containers:
+        - name: login-ui
+          image: ghcr.io/vaynerakawalo/login-ui:551d26d
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always

@@ -14,19 +14,7 @@ spec:
     - auth.blamedevs.com
 
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /
-      filters:
-        - type: URLRewrite
-          urlRewrite:
-            hostname: "vaynerakawalo.github.io"
-            path:
-              type: ReplacePrefixMatch
-              replacePrefixMatch: /login-ui
-
       backendRefs:
-        - name: login-ui-external-name
+        - name: login-ui
           namespace: auth
-          port: 443
+          port: 80
