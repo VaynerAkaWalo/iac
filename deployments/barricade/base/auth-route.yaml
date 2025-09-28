@@ -18,9 +18,9 @@ spec:
         - path:
             type: Prefix
             value: /api
-          backendRefs:
-            - name: barricade
-              port: 8080
+      backendRefs:
+        - name: barricade
+          port: 8080
 
     - backendRefs:
         - name: login-ui
