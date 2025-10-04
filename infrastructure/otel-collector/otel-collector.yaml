@@ -16,7 +16,7 @@ spec:
     clusterName: iac-cluster
     namespaceOverride: observability
     splunkPlatform:
-      endpoint: https://splunk-s1-standalone-service:8088/services/collector/event
+      endpoint: http://splunk-s1-standalone-service:8088/services/collector/event
       index: logs
       insecureSkipVerify: true
 
