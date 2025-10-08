@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: barricade
-          image: ghcr.io/vaynerakawalo/barricade:a3b6717
+          image: ghcr.io/vaynerakawalo/barricade:7bf84f6
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -33,4 +33,6 @@ spec:
               value: barricade-operational-entities-stage
             - name: SESSION_TABLE_NAME_INDEX
               value: secondary-lookup-index
+            - name: DOMAIN
+              value: blamedevs.com
       restartPolicy: Always
