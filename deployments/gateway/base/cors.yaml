@@ -21,3 +21,4 @@ spec:
       - PUT
     allowHeaders:
       - "Content-Type"
+    allowCredentials: true
