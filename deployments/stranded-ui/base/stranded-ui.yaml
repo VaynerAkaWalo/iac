@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stranded-ui
+  namespace: stranded
+  labels:
+    app: stranded-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stranded-ui
+  template:
+    metadata:
+      name: stranded-ui
+      labels:
+        app: stranded-ui
+    spec:
+      containers:
+        - name: stranded-ui
+          image: ghcr.io/vaynerakawalo/stranded-ui:6496c30
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always

@@ -7,3 +7,4 @@ resources:
   - mc-server-cleaner.yaml
   - login-ui.yaml
   - barricade.yaml
+  - stranded-ui.yaml

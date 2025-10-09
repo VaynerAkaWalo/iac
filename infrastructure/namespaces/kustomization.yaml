@@ -6,3 +6,4 @@ resources:
   - security.yaml
   - minecraft-server.yaml
   - auth.yaml
+  - stranded.yaml
