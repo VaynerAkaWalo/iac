@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: barricade
-          image: ghcr.io/vaynerakawalo/barricade:479f56d
+          image: ghcr.io/vaynerakawalo/barricade:efea6e0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
