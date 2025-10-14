@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wilson
+  labels:
+    app: wilson
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wilson
+  template:
+    metadata:
+      name: wilson
+      labels:
+        app: wilson
+    spec:
+      containers:
+        - name: wilson
+          image: ghcr.io/vaynerakawalo/wilson:cd-202510142209-1fef67e
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8787
+              protocol: TCP
+          env:
+            - name: BARRICADE_PATH
+              value: auth.blamedevs.com
+      restartPolicy: Always
