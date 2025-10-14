@@ -67,7 +67,8 @@ jobs:
             --owner=${{ github.repository_owner }} \
             --repository=${{ github.event.repository.name }} \
             --branch=main \
-            --path=clusters/iac
+            --path=clusters/iac \
+            --components-extra image-reflector-controller,image-automation-controller
 
       - name: Setup kubectl
         uses: azure/setup-kubectl@v4
