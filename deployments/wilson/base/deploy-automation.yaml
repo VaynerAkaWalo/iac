@@ -10,7 +10,9 @@ spec:
       name: flux-system
       namespace: flux-system
     commit:
-      author: Flux CD Bot <fluxcd@users.noreply.github.com>
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
       messageTemplate: "Wilson deploy - {{ .Image.Tag }}"
   interval: 3m0s
   update:
