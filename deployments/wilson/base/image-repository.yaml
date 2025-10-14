@@ -6,4 +6,5 @@ metadata:
 spec:
   image: ghcr.io/vaynerakawalo/wilson
   interval: 3m0s
-  exclusionList: '^latest$'
+  exclusionList:
+    - '^latest$'
