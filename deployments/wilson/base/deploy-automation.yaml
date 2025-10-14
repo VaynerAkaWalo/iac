@@ -4,11 +4,10 @@ metadata:
   name: wilson-image-update
   namespace: flux-system
 spec:
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
   git:
-    sourceRef:
-      kind: GitRepository
-      name: flux-system
-      namespace: flux-system
     commit:
       author:
         email: fluxcdbot@users.noreply.github.com
