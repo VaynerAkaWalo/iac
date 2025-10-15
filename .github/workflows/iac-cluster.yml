@@ -68,6 +68,7 @@ jobs:
             --repository=${{ github.event.repository.name }} \
             --branch=main \
             --path=clusters/iac \
+            --read-write-key \
             --components-extra image-reflector-controller,image-automation-controller
 
       - name: Setup kubectl
