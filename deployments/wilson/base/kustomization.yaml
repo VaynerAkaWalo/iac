@@ -6,4 +6,3 @@ resources:
   - service.yaml
   - image-repository.yaml
   - image-policy.yaml
-  - deploy-automation.yaml

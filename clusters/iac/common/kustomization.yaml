@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - gateway.yaml
   - splunk.yaml
+  - deploy-automation.yaml
