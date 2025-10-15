@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: wilson
-          image: ghcr.io/vaynerakawalo/wilson:cd-202510142209-1fef67e # {"$imagepolicy": "flux-system:wilson-policy"}
+          image: ghcr.io/vaynerakawalo/wilson:CD-202510142322-e3ee6e5 # {"$imagepolicy": "flux-system:wilson-policy"}
           imagePullPolicy: Always
           ports:
             - containerPort: 8787
