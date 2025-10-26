@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: stranded-ui
-          image: ghcr.io/vaynerakawalo/stranded-ui:a0e8c1a
+          image: ghcr.io/vaynerakawalo/stranded-ui:9967859
           imagePullPolicy: Always
           ports:
             - containerPort: 80
