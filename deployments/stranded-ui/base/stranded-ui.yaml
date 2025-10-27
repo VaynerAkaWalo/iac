@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: stranded-ui
-          image: ghcr.io/vaynerakawalo/stranded-ui:CD-202510272120-d28d604 # {"$imagepolicy": "flux-system:stranded-ui-policy"}
+          image: ghcr.io/vaynerakawalo/stranded-ui:CD-202510272246-51a0cb4 # {"$imagepolicy": "flux-system:stranded-ui-policy"}
           imagePullPolicy: Always
           ports:
             - containerPort: 80
