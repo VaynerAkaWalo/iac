@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - login-ui.yaml
   - service.yaml
+  - image-policy.yaml
+  - image-repository.yaml
