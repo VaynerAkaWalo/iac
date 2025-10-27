@@ -1,0 +1,11 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: barricade-policy
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: barricade-repository
+  policy:
+    alphabetical:
+      order: asc

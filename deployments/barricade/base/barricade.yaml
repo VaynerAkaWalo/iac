@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: barricade
-          image: ghcr.io/vaynerakawalo/barricade:efea6e0
+          image: ghcr.io/vaynerakawalo/barricade:efea6e0 # {"$imagepolicy": "flux-system:barricade-policy"}
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

@@ -4,3 +4,5 @@ resources:
   - barricade.yaml
   - auth-route.yaml
   - service.yaml
+  - image-policy.yaml
+  - image-repository.yaml
