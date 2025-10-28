@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: login-ui
-          image: ghcr.io/vaynerakawalo/login-ui:CD-202510272205-c4ecaa9 # {"$imagepolicy": "flux-system:login-ui-policy"}
+          image: ghcr.io/vaynerakawalo/login-ui:CD-202510282035-edda3bc # {"$imagepolicy": "flux-system:login-ui-policy"}
           imagePullPolicy: Always
           ports:
             - containerPort: 80
