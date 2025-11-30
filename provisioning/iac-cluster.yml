@@ -31,7 +31,7 @@ datastore:
 schedule_workloads_on_masters: true
 
 masters_pool:
-  instance_type: cx22
+  instance_type: cx23
   instance_count: 3
   locations:
     - fsn1
