@@ -11,7 +11,7 @@ seal-tls-secret:
    	rm kubernetes/secrets/$(name)-plain-secret.yaml
 
 seal-secret:
-		kubectl create secret generic $(name) --from-literal=$(payload) \
+		kubectl create secret generic $(name) --from-literal=$(payload) --from-literal=$(payload2) --from-literal=$(payload3) \
           --dry-run=client -o yaml > infrastructure/secrets/$(name)-plain-secret.yaml; \
         kubeseal --namespace=$(namespace) --cert=certs/sealed-secrets/secret.crt < infrastructure/secrets/$(name)-plain-secret.yaml > infrastructure/secrets/$(name).yaml; \
         rm infrastructure/secrets/$(name)-plain-secret.yaml
