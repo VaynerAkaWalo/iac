@@ -23,6 +23,9 @@ spec:
           ports:
             - containerPort: 8787
               protocol: TCP
+          envFrom:
+            - secretRef:
+                name: wilson-stage-secrets
           env:
             - name: BARRICADE_PATH
               value: http://barricade.auth.svc.cluster.local:8080
