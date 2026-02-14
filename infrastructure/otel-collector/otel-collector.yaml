@@ -42,7 +42,6 @@ spec:
           user: "elastic"
           password: "${env:ELASTIC_PASSWORD}"
           logs_index: "k3s-logs"
-          manage_template: false
           mapping:
             mode: none
           tls:
