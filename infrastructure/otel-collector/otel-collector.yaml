@@ -41,8 +41,10 @@ spec:
           endpoints: ["https://elastic-search-es-http.observability.svc:9200"]
           user: "elastic"
           password: "${env:ELASTIC_PASSWORD}"
-
-          logs_index: "logs"
+          logs_index: "k3s-logs"
+          manage_template: false
+          mapping:
+            mode: none
           tls:
             insecure_skip_verify: true
 
