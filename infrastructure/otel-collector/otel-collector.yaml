@@ -1,0 +1,52 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: otel-collector
+  namespace: observability
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: opentelemetry-collector
+      version: "0.145.0"
+      sourceRef:
+        kind: HelmRepository
+        name: open-telemetry
+      interval: 1h
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    mode: daemonset
+    presets:
+      logsCollection:
+        enabled: true
+        includeCollectorLogs: true
+      kubernetesAttributes:
+        enabled: true
+
+    extraEnvs:
+      - name: ELASTIC_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: elastic-search-es-elastic-user
+            key: elastic
+
+    config:
+      exporters:
+        elasticsearch:
+          endpoints: ["https://elastic-search-es-http.observability.svc:9200"]
+          user: "elastic"
+          password: "${env:ELASTIC_PASSWORD}"
+
+          logs_index: "logs"
+          tls:
+            insecure_skip_verify: true
+
+      service:
+        pipelines:
+          logs:
+            receivers: [filelog]
+            processors: [k8sattributes, memory_limiter, batch]
+            exporters: [elasticsearch]
