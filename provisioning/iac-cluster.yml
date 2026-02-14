@@ -1,7 +1,7 @@
 ---
 cluster_name: iac-cluster
 kubeconfig_path: "./kubeconfig"
-k3s_version: v1.30.3+k3s1
+k3s_version: v1.35.0+k3s3
 
 networking:
   ssh:
@@ -28,17 +28,23 @@ networking:
 datastore:
   mode: etcd
 
-schedule_workloads_on_masters: true
+schedule_workloads_on_masters: false
 
 masters_pool:
-  instance_type: cx23
-  instance_count: 3
+  instance_type: cax11
+  instance_count: 1
   locations:
-    - fsn1
-    - hel1
     - nbg1
 
 worker_node_pools:
+  - name: worker-nodes-arm
+    instance_type: cax11
+    location: nbg1
+    autoscaling:
+      enabled: true
+      min_instances: 0
+      max_instances: 4
+
   - name: server-nodes-small-shared
     instance_type: cax11
     location: fsn1
