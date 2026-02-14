@@ -1,0 +1,17 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+  namespace: observability
+spec:
+  version: 9.3.0
+  count: 1
+  elasticsearchRef:
+    name: elastic-search
+  config:
+    server.ssl.enabled: false
+    server.publicBaseUrl: "https://kibana.blamedevs.com"
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true

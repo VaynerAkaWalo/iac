@@ -1,0 +1,17 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: logs
+  namespace: flux-system
+spec:
+  interval: 3m0s
+  path: ./infrastructure/logs
+  dependsOn:
+    - name: namespaces
+    - name: secrets
+    - name: elastic-cloud
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  prune: true
+  wait: true
