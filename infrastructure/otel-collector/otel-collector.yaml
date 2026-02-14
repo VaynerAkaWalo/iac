@@ -20,7 +20,7 @@ spec:
   values:
     mode: daemonset
     image:
-      repository: "otel/opentelemetry-collector-k8s"
+      repository: "otel/opentelemetry-collector-contrib"
     presets:
       logsCollection:
         enabled: true
