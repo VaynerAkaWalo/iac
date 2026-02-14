@@ -7,3 +7,4 @@ resources:
   - envoy-gateway.yaml
   - elastic-cloud.yaml
   - logs.yaml
+  - otel-collector.yaml
