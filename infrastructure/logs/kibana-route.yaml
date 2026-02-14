@@ -15,5 +15,5 @@ spec:
 
   rules:
     - backendRefs:
-        - name: kibana
+        - name: kibana-kb-http
           port: 5601
