@@ -37,8 +37,15 @@ masters_pool:
     - nbg1
 
 worker_node_pools:
-  - name: worker-nodes-arm
+  - name: worker-nodes-arm64
     instance_type: cax11
+    location: nbg1
+    autoscaling:
+      enabled: true
+      min_instances: 0
+      max_instances: 4
+  - name: worker-nodes-amd64
+    instance_type: cx23
     location: nbg1
     autoscaling:
       enabled: true
