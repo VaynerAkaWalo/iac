@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: auth-ui
-          image: ghcr.io/vaynerakawalo/auth-ui:cd-20260405-8edc5af # {"$imagepolicy": "flux-system:auth-ui-policy"}
+          image: ghcr.io/vaynerakawalo/auth-ui:main # {"$imagepolicy": "flux-system:auth-ui-policy"}
           imagePullPolicy: Always
           ports:
             - containerPort: 80
