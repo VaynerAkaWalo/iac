@@ -1,0 +1,11 @@
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: auth-ui-policy
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: auth-ui-repository
+  policy:
+    alphabetical:
+      order: asc

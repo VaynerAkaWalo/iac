@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-ui
+  namespace: auth
+  labels:
+    app: auth-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-ui
+  template:
+    metadata:
+      name: auth-ui
+      labels:
+        app: auth-ui
+    spec:
+      containers:
+        - name: auth-ui
+          image: ghcr.io/vaynerakawalo/auth-ui:cd-20260405-8edc5af # {"$imagepolicy": "flux-system:auth-ui-policy"}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always

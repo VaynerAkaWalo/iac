@@ -29,5 +29,5 @@ spec:
               type: ReplacePrefixMatch
 
     - backendRefs:
-        - name: login-ui
+        - name: auth-ui
           port: 80
