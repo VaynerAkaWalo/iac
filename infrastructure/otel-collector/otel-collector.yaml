@@ -36,6 +36,13 @@ spec:
             key: elastic
 
     config:
+      processors:
+        transform:
+          log_statements:
+            - context: log
+              statements:
+                - merge_maps(attributes, ParseJSON(body), "upsert") where IsString(body) and Substring(body, 0, 1) == "{"
+
       exporters:
         elasticsearch:
           endpoints: ["https://elastic-search-es-http.observability.svc:9200"]
@@ -51,5 +58,5 @@ spec:
         pipelines:
           logs:
             receivers: [filelog]
-            processors: [k8sattributes, memory_limiter, batch]
+            processors: [k8sattributes, transform, memory_limiter, batch]
             exporters: [elasticsearch]
