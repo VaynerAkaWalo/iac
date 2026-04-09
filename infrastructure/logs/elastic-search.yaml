@@ -9,4 +9,5 @@ spec:
     - name: logs
       count: 1
       config:
+        discovery.type: single-node
         node.store.allow_mmap: false
