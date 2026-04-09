@@ -8,10 +8,5 @@ spec:
   nodeSets:
     - name: logs
       count: 1
-      podTemplate:
-        spec:
-          volumes:
-            - name: elasticsearch-data
-              emptyDir: {}
       config:
         node.store.allow_mmap: false
