@@ -5,7 +5,6 @@ resources:
   - mc-server-operator.yaml
   - mc-server-manager.yaml
   - mc-server-cleaner.yaml
-  - login-ui.yaml
   - barricade.yaml
   - stranded-ui.yaml
   - wilson.yaml
