@@ -41,7 +41,10 @@ spec:
           log_statements:
             - context: log
               statements:
-                - merge_maps(attributes, ParseJSON(body), "upsert") where IsString(body) and Substring(body, 0, 1) == "{"
+                - set(cache, ParseJSON(body)) where IsString(body) and Substring(body, 0, 1) == "{"
+                - merge_maps(attributes, cache, "upsert") where cache != nil
+                - set(body, cache) where cache != nil
+                - set(severity_text, attributes["level"]) where attributes["level"] != nil
 
       exporters:
         elasticsearch:
