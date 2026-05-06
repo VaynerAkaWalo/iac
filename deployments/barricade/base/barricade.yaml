@@ -27,12 +27,10 @@ spec:
             - secretRef:
                 name: barricade-prod-keys
           env:
-            - name: IDENTITY_TABLE_NAME
-              value: barricade-entities-stage
-            - name: SESSION_TABLE
-              value: barricade-operational-entities-stage
-            - name: SESSION_TABLE_NAME_INDEX
-              value: secondary-lookup-index
+            - name: ENTITIES_TABLE
+              value: barricade-entities-prod
+            - name: OPERATIONAL_TABLE
+              value: barricade-operational-entities-prod
             - name: DOMAIN
               value: blamedevs.com
       restartPolicy: Always
